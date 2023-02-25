@@ -121,10 +121,12 @@ Each `ScooterApp` should include the following methods
     - Create a new scooter, add it to the station’s scooter list, and set its station property. Log `created new scooter` to the console. Return the scooter. 
     - Throws `no such station` error if the station does not exist. 
 - `dockScooter(scooter, station)`
+REVISE@@@
     - Add the scooter to the station’s scooter list, and dock it. 
     - Log `scooter is docked` to the console.  
     - Throws `no such station` error if the station does not exist. 
     - Throws `scooter already at station` error if the scooter is already there.
+REVISE###@@
 - `rentScooter(scooter, user)`
     - Locate the given scooter at one of the stations, and remove it from that station. Rent it to the user. Log `scooter is rented` to the console. 
     - If the scooter is already rented, throw the error `scooter already rented`.
