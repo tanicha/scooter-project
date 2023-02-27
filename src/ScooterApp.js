@@ -13,15 +13,16 @@ class ScooterApp {
   }
 
   registerUser(username, password, age){
-    if (!username in this.registeredUsers && age >= 18){
-      this.registeredUsers[username] = new User(username, password, age)
+    if (!username in this.registeredUsers && age >= 18)
+      this.registeredUsers.push(username)
       console.log(this.username, 'has been registered')
-    } else if (age < 18) {
-        throw new Error ('Too young to register')
-    } else if (username in this.registeredUsers){
-        throw new Error ('User is already registered')
+
+    if (age < 18)
+      throw new Error('User is too young to register')
+    
+    if (username in this.registeredUsers)
+      throw new Error ('User is already registered')
     }
-  }
 
   loginUser(username, password){
     if (username in this.registeredUsers)
@@ -52,31 +53,32 @@ class ScooterApp {
     }
   }
 
-  dockScooter(scooter, station){
-    if (station in this.station){
-      if(!this.station[station].includes(scooter))
-        this.station[station].push(scooter)
-        console.log(this.scooter, 'is docked')
+  dockScooter(scooter, station) {
+    if (!this.stations[station])
+      throw new Error('No such station');
 
-    if (!station in this.station)
-        throw new Error ('No such station')
-    
-    if (this.station[station].includes(scooter))
-      throw new Error ('Scooter is already at the station')
+    for (let station in this.stations) {
+      if (Object.values(this.stations[station]).includes(scooter)) {
+        throw new Error('Scooter is already at station');
+      }
     }
+    this.stations[station].push(scooter);
+    scooter.dock(station);
+    console.log('Scooter is docked');
   }
 
   rentScooter(scooter, user){
-    for (let stationKeys in this.stations){
-      if (stationKeys.includes(scooter))
-        scooter.rent(user)
-        scooter.pop()
-        console.log('Scooter is rented to: ', this.user)
+    for (let station in this.stations){
+      let stationOne = this.stations[station]
+      if (stationOne.includes(scooter)){
+        scooter.rent(user);
+        console.log('Scooter is rented');
+      }
     }
-      if (scooter.user != null)
-        throw new Error ('Scooter has already been rented')
+    if(scooter.user != null) 
+      throw new Error('Scooter already rented')
   }
-  
+
   print(){
     for (let users in this.registeredUsers){
       console.log('Registered Users: ', users)
@@ -84,9 +86,10 @@ class ScooterApp {
 
     for (let station in this.stations){
       console.log('Stations: ', station)
-      console.log('Amount of Scooters: ', station.length)
+      console.log('Amount of Scooters: ', this.stations[this.station])
       }
     }
   }
 
 module.exports = ScooterApp;
+
