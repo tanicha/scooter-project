@@ -18,14 +18,13 @@ test('regiser user method test', () => {
 
 test('error age test', () => {
     expect(() => {
-      scooterAppTest.registerUser('Tani', 'Password', 13);
-    }).toThrowError('User is too young to register');
+    scooterAppTest.registerUser('Tani', 'Password', 13)}).toThrowError('User is too young to register');
 });
 
 // log in
 test('login user error incorrect password test', () => {
     expect(() => {
-        scooterAppTest.loginUser('Tani', 'Password2')}).toThrowError('Password is incorrect')
+    scooterAppTest.loginUser('Tani', 'Password2')}).toThrowError('Password is incorrect')
 });
 
 // log out

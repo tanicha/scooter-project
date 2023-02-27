@@ -22,7 +22,7 @@ class ScooterApp {
     
     if (username in this.registeredUsers)
       throw new Error ('User is already registered')
-    }
+  }
 
   loginUser(username, password){
     if (username in this.registeredUsers)
@@ -59,12 +59,13 @@ class ScooterApp {
 
     for (let station in this.stations) {
       if (Object.values(this.stations[station]).includes(scooter)) {
-        throw new Error('Scooter is already at station');
+        throw new Error('Scooter is already at station')
+      } else {
+        this.stations[station].push(scooter);
+        scooter.dock(station);
+        console.log('Scooter is docked');
       }
     }
-    this.stations[station].push(scooter);
-    scooter.dock(station);
-    console.log('Scooter is docked');
   }
 
   rentScooter(scooter, user){

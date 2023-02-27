@@ -24,15 +24,13 @@ describe('Scooter test', () => {
   test('rent method error test for battery', () => {
     scooterTest.charge = 10;
     expect(() => {
-      scooterTest.rent();
-    }).toThrowError('Scooter needs to be charged');
+      scooterTest.rent()}).toThrowError('Scooter needs to be charged');
   });
 
   test('rent method error test for broken', () => {
     scooterTest.isBroken = true;
     expect(() => {
-      scooterTest.rent();
-    }).toThrowError('Scooter has to be repaired');
+      scooterTest.rent()}).toThrowError('Scooter has to be repaired');
   });
 
   //dock method
