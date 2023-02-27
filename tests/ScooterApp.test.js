@@ -44,17 +44,17 @@ test('rent scooter method test', () => {
 
 // dock scooter
 describe("dockScooter method test", () => {
-    test("dock scooter test", () => {
-        let scooterTest2 = new Scooter("Station 1");
-        scooterAppTest.dockScooter(scooterTest2, "Station 1");
-        expect(scooterAppTest.stations["Station 1"]).toContain(scooterTest2);
-    });
+test("dock scooter test", () => {
+    let scooterTest2 = new Scooter("Station 1");
+    scooterAppTest.dockScooter(scooterTest2, "Station 1");
+    expect(scooterAppTest.stations["Station 1"]).toContain(scooterTest2);
+});
 
-    test("dock scooter error method test", () => {
-        const scooter = new Scooter();
-        expect(() => scooterAppTest.dockScooter(scooter, "Station 4")).toThrow('No such station');
-    });
+test("dock scooter error method test", () => {
+    let scooterTest = new Scooter();
+    expect(() => scooterAppTest.dockScooter(scooterTest, "Station 4")).toThrow('No such station');
+});
 
-    });
+});
 
 });
