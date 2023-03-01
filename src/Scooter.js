@@ -26,12 +26,6 @@ rent(user){
 }
 
   dock(station){
-    if (!this.station) 
-      throw new Error('Station does not exist')
-
-    if (!this.station) 
-      throw new Error('Scooter has already been docked')
-
     this.station = station;
     this.user = null;
     console.log(this.serial, 'has been docked')

@@ -21,13 +21,18 @@ describe('Scooter test', () => {
     expect(scooterTest.user).toBe(this.user);
   });
 
+  test('rent method error test due to user != null', () => {
+    Scooter.user = 'Tani'
+    expect(() => scooterTest.rent('Dyl')).toThrowError('Scooter is already rented')
+  });
+
   test('rent method error test for battery', () => {
     scooterTest.charge = 10;
     expect(() => {
       scooterTest.rent()}).toThrowError('Scooter needs to be charged');
   });
 
-  test('rent method error test for broken', () => {
+  test('rent method error test for broken scooter', () => {
     scooterTest.isBroken = true;
     expect(() => {
       scooterTest.rent()}).toThrowError('Scooter has to be repaired');
@@ -35,8 +40,8 @@ describe('Scooter test', () => {
 
   //dock method
   test('dock method', () => {
-    scooterTest.dock(this.station);
-    expect(scooterTest.station).toBe(this.station);
+    scooterTest.dock('Station 1');
+    expect(scooterTest.station).toBe('Station 1');
     expect(scooterTest.user).toBe(null);
   });
 });

@@ -13,7 +13,7 @@ class ScooterApp {
   }
 
   registerUser(username, password, age){
-    if (!username in this.registeredUsers && age >= 18)
+    if (!username in this.registeredUsers && this.password === password && age >= 18)
       this.registeredUsers.push(username)
       console.log(this.username, 'has been registered')
 
@@ -58,7 +58,7 @@ class ScooterApp {
       throw new Error('No such station');
 
     for (let station in this.stations) {
-      if (Object.values(this.stations[station]).includes(scooter)) {
+      if (this.stations[station].includes(scooter)) {
         throw new Error('Scooter is already at station')
       } else {
         this.stations[station].push(scooter);
@@ -70,13 +70,13 @@ class ScooterApp {
 
   rentScooter(scooter, user){
     for (let station in this.stations){
-      let stationOne = this.stations[station]
-      if (stationOne.includes(scooter)){
+      let thisStation = this.stations[station]
+      if (thisStation.includes(scooter)){
         scooter.rent(user);
         console.log('Scooter is rented');
       }
     }
-    if(scooter.user != null) 
+    if(Scooter.user != null) 
       throw new Error('Scooter already rented')
   }
 
@@ -84,7 +84,6 @@ class ScooterApp {
     for (let users in this.registeredUsers){
       console.log('Registered Users: ', users)
     }
-
     for (let station in this.stations){
       console.log('Stations: ', station)
       console.log('Amount of Scooters: ', this.stations[this.station])
@@ -93,4 +92,3 @@ class ScooterApp {
   }
 
 module.exports = ScooterApp;
-

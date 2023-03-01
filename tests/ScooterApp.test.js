@@ -11,9 +11,15 @@ describe("ScooterApp", () => {
 });
 
 // register user
-test('regiser user method test', () => {
-    scooterAppTest.registerUser('Tani', 'Password', 20);
+test('register user method test', () => {
     expect(scooterAppTest.registerUser()).toBe(this.username, 'has been registered')
+});
+
+//not throwing - failing
+test('register user method error test', () => {
+    const registerUserTest = new ScooterApp()
+    registerUserTest.registeredUsers = {'username1': 'Tani'};
+    expect(() => registerUserTest.registerUser('Tani', 'Password', 20)).toThrowError('User is already registered')
 });
 
 test('error age test', () => {
@@ -34,24 +40,37 @@ test("logout user method test", ()=>{
 });
 
 // rent scooter
+
+//failing
 test('rent scooter method test', () => {
-    let thisUser = scooterAppTest.registeredUsers['Tani'];
-    let thisScoota = scooterAppTest.stations['Station 1'][0];
-    userLogIn = () => { scooterAppTest.rentScooter(thisScoota, thisUser); }
-    expect(userLogIn).toThrow();
+    scooterRenter = new ScooterApp()
+    let stationsTest = scooterRenter.stations = {
+    'Station 1': ['scooter1'],
+    'Station 2': ['scooter2'],
+    'Station 3': ['scooter3']}
+    
+    expect(scooterRenter.scooter).toBe('scooter2')
+    expect(scooterRenter.rentScooter('scooter2', 'Tani').user).toBe(this.user, 'has checked out', this.serial)
+});
+
+  test('rent method throws error if scooter is already rented', () => {
+    rentTest = new ScooterApp()
+    Scooter.user = 'Tani'
+    expect(() => rentTest.rentScooter(this.scooter, 'Ryan')).toThrowError('Scooter already rented')
 });
 
 // dock scooter
 describe("dockScooter method test", () => {
 test("dock scooter test", () => {
-    let scooterTest2 = new Scooter("Station 1");
+    let scooterTest2 = new ScooterApp("Station 1");
     scooterAppTest.dockScooter(scooterTest2, "Station 1");
     expect(scooterAppTest.stations["Station 1"]).toContain(scooterTest2);
 });
 
-test("dock scooter error method test", () => {
-    let scooterTest = new Scooter();
+test("dock scooter error method test for no station existing", () => {
+    let scooterTest = new ScooterApp();
     expect(() => scooterAppTest.dockScooter(scooterTest, "Station 4")).toThrow('No such station');
+
 });
 
 });
