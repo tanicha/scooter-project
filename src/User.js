@@ -13,8 +13,8 @@ class User {
       this.loggedIn = true;
       console.log(this.username, 'is logged in')
     } else {
-        throw new Error('Incorrect password')
-  }
+      throw new Error('Incorrect password')
+    }
 }
 
   logout(){

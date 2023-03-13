@@ -1,3 +1,4 @@
+// make sure to remove unused imports
 const { TestWatcher } = require('jest');
 const User = require('../src/User')
 
@@ -18,8 +19,8 @@ describe('User properties test', () => {
 //methods
 
   test('log in method test', () => {
-      userTest.login('password123');
-      expect(userTest.loggedIn).toBe(true);
+    userTest.login('password123');
+    expect(userTest.loggedIn).toBe(true);
   });
 
   test('throws error if incorrect password', () => {
@@ -27,8 +28,8 @@ describe('User properties test', () => {
   });
 
   test('log out method test', () => {
-      userTest.login('password123');
-      userTest.logout();
-      expect(userTest.loggedIn).toBe(false);
+    userTest.login('password123');
+    userTest.logout();
+    expect(userTest.loggedIn).toBe(false);
   });
 });

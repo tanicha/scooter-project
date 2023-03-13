@@ -3,6 +3,7 @@ const User = require('../src/User')
 
 describe('Scooter test', () => {
   let scooterTest;
+  // love this beforeEach!!
   beforeEach(() => {
     scooterTest = new Scooter('Station 1');
   });
@@ -10,6 +11,7 @@ describe('Scooter test', () => {
   test('scooter is an object', () => {
     scooterType = new Scooter('Station 1');
     expect(typeof scooterType).toBe('object');
+    // consider adding tests to verify initialized attribute values
   });
 
   //Method tests:
@@ -22,6 +24,8 @@ describe('Scooter test', () => {
   });
 
   test('rent method error test due to user != null', () => {
+    // rather than the user attribute on the Scooter class statically,
+    // this could be scooterTest.user = 'Tani'
     Scooter.user = 'Tani'
     expect(() => scooterTest.rent('Dyl')).toThrowError('Scooter is already rented')
   });
@@ -44,4 +48,6 @@ describe('Scooter test', () => {
     expect(scooterTest.station).toBe('Station 1');
     expect(scooterTest.user).toBe(null);
   });
+
+  // consider adding test to make sure serial incrementing is working as expected
 });
